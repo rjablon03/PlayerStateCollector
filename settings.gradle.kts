@@ -1,0 +1,1 @@
+rootProject.name = "player_data_collector"

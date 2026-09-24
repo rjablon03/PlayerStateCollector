@@ -1,0 +1,4 @@
+name: player_data_collector
+version: 1.0
+main: com.player_data_collector.collector.Collector
+api-version: '26.3'
