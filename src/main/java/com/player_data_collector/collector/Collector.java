@@ -20,11 +20,11 @@ public class Collector extends JavaPlugin implements Listener {
             return;
         }
 
-        // Damage calculated by Minecraft, converted from health points to hearts
-        double damageHearts = event.getFinalDamage() / 2.0;
+        // Damage converted from health points to hearts
+        double damageHearts = Math.round((event.getFinalDamage() / 2.0) * 2) / 2.0;
 
-        // Player's health before the damage
-        double healthBeforeHearts = player.getHealth() / 2.0;
+        // Player's health before damage, rounded to nearest half-heart
+        double healthBeforeHearts = Math.round((player.getHealth() / 2.0) * 2) / 2.0;
 
         // Why the player took damage
         EntityDamageEvent.DamageCause cause = event.getCause();
@@ -32,16 +32,15 @@ public class Collector extends JavaPlugin implements Listener {
         // Wait one tick so Minecraft can apply the damage
         getServer().getScheduler().runTask(this, () -> {
 
-            // Player's actual health after the damage
-            double healthAfterHearts = player.getHealth() / 2.0;
+            // Player's actual health after damage
+            double healthAfterHearts = Math.round((player.getHealth() / 2.0) * 2) / 2.0;
 
             getLogger().info(
                     player.getName()
                             + " took " + damageHearts + " hearts of damage"
                             + " from " + cause
                             + ". Health: "
-                            + healthBeforeHearts + " -> "
-                            + healthAfterHearts
+                            + healthBeforeHearts + " -> " + healthAfterHearts
             );
         });
     }
